@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "BankaiScript",
+  "version": "1.0.0",
+  "description": "Premium userscript manager with built-in video download and PDF tools.",
+  "permissions": [
+    "scripting",
+    "storage",
+    "downloads",
+    "debugger",
+    "tabs",
+    "activeTab",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "index.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "src/background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/index.js"],
+      "all_frames": true
+    },
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["src/content/mainBridge.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}
