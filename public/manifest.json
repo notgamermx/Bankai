@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "BankaiScript",
-  "version": "1.0.0",
-  "description": "Premium userscript manager with built-in video download and PDF tools.",
+  "version": "2.0.0",
+  "description": "Premium universal media downloader — capture video & audio from any website.",
   "permissions": [
     "scripting",
     "storage",
@@ -10,7 +10,9 @@
     "debugger",
     "tabs",
     "activeTab",
-    "declarativeNetRequest"
+    "declarativeNetRequest",
+    "webRequest",
+    "webNavigation"
   ],
   "host_permissions": [
     "<all_urls>"

@@ -14,7 +14,9 @@ function Dashboard() {
         // Default scripts
         const defaults = [
           { id: 'yt_opt', name: 'YouTube Optimizer', enabled: true, matches: '*://*.youtube.com/*' },
-          { id: 'insta_dl', name: 'InstaDownloader', enabled: true, matches: '*://*.instagram.com/*' }
+          { id: 'insta_dl', name: 'InstaDownloader', enabled: true, matches: '*://*.instagram.com/*' },
+          { id: 'twitter_dl', name: 'Twitter/X Downloader', enabled: true, matches: '*://*.x.com/*, *://*.twitter.com/*' },
+          { id: 'universal_capture', name: 'Universal Media Capture', enabled: true, matches: '<all_urls>' }
         ];
         setScripts(defaults);
         chrome.storage.local.set({ bankai_scripts: defaults });
