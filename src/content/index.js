@@ -188,7 +188,8 @@ function injectYouTube() {
           url: _bankaiYTUrl,
           filename: `YouTube_${Date.now()}.mp4`,
           mediaType: 'video',
-          domain: 'youtube.com'
+          domain: 'youtube.com',
+          referer: window.location.href
         });
       } else {
         alert("Bankai: Capturing stream... ensure the video is playing.");

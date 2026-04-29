@@ -192,11 +192,40 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const domain = message.domain ? sanitizeFilename(message.domain) : 'Bankai';
     const filename = message.filename || `${domain}_${message.mediaType || 'media'}_${Date.now()}${ext}`;
 
-    chrome.downloads.download({
-      url: message.url,
-      filename: filename,
-      saveAs: true
-    });
+    // Use fetch-then-blob approach for cross-origin URLs (YouTube, etc.)
+    // The service worker has <all_urls> host permission so fetch works
+    (async () => {
+      try {
+        const response = await fetch(message.url, {
+          credentials: 'include',
+          headers: {
+            'Accept': '*/*',
+            'Referer': message.referer || ''
+          }
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const blob = await response.blob();
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          chrome.downloads.download({
+            url: reader.result,
+            filename: filename,
+            saveAs: true
+          });
+        };
+        reader.readAsDataURL(blob);
+      } catch (err) {
+        console.warn("Bankai: Blob fetch failed, trying direct download:", err.message);
+        // Fallback to direct download
+        chrome.downloads.download({
+          url: message.url,
+          filename: filename,
+          saveAs: true
+        });
+      }
+    })();
   }
 
   // Get all captured media for a tab
