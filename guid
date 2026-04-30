@@ -41,3 +41,11 @@ Since BankaiScript is in developer beta, you must load it manually into your bro
 - **Popup:** Click the Bankai icon in your toolbar to see detected media.
 - **Dashboard:** Access the full script manager through the extension options or the 'DASHBOARD' button in the popup.
 - **Injection:** BankaiScript runs silently in the background, ready to intercept streams when you navigate to supported sites.
+
+## Contributing
+
+Contributions are always welcome. To contribute:
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch and open a Pull Request
